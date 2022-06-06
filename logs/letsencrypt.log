@@ -1,0 +1,647 @@
+2022-06-06 17:09:48,925:DEBUG:certbot._internal.main:certbot version: 1.26.0
+2022-06-06 17:09:48,926:DEBUG:certbot._internal.main:Location of certbot entry point: /usr/local/bin/certbot
+2022-06-06 17:09:48,926:DEBUG:certbot._internal.main:Arguments: ['--server', 'https://acme-v02.api.letsencrypt.org/directory', '--agree-tos', '--cert-name', 'tap.fynesy.com', '-d', '*.homelab.tap.fynesy.com', '-d', '*.tkglab.tap.fynesy.com', '-d', '*.akslab.tap.fynesy.com', '-d', '*.gkelab.tap.fynesy.com', '-d', '*.ekslab.tap.fynesy.com', '-d', '*.cf.homelab.tap.fynesy.com', '-d', '*.cf.homelab.fynesy.com', '-d', '*.login.cf.homelab.fynesy.com', '-d', '*.uaa.cf.homelab.fynesy.com', '-d', 'om.system.homelab.fynesy.com', '-m', 'tmfynes@yahoo.com', '--config-dir', './config', '--logs-dir', './logs', '--work-dir', './work', '--manual', '--preferred-challenges', 'dns']
+2022-06-06 17:09:48,926:DEBUG:certbot._internal.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#apache,PluginEntryPoint#manual,PluginEntryPoint#nginx,PluginEntryPoint#null,PluginEntryPoint#standalone,PluginEntryPoint#webroot)
+2022-06-06 17:09:48,968:DEBUG:certbot._internal.log:Root logging level set at 30
+2022-06-06 17:09:48,971:DEBUG:certbot._internal.plugins.selection:Requested authenticator manual and installer None
+2022-06-06 17:09:48,974:DEBUG:certbot._internal.plugins.selection:Single candidate plugin: * manual
+Description: Manual configuration or run your own shell scripts
+Interfaces: Authenticator, Plugin
+Entry point: manual = certbot._internal.plugins.manual:Authenticator
+Initialized: <certbot._internal.plugins.manual.Authenticator object at 0x105adb340>
+Prep: True
+2022-06-06 17:09:48,974:DEBUG:certbot._internal.plugins.selection:Selected authenticator <certbot._internal.plugins.manual.Authenticator object at 0x105adb340> and installer None
+2022-06-06 17:09:48,975:INFO:certbot._internal.plugins.selection:Plugins selected: Authenticator manual, Installer None
+2022-06-06 17:09:49,041:DEBUG:acme.client:Sending GET request to https://acme-v02.api.letsencrypt.org/directory.
+2022-06-06 17:09:49,063:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): acme-v02.api.letsencrypt.org:443
+2022-06-06 17:09:49,269:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "GET /directory HTTP/1.1" 200 658
+2022-06-06 17:09:49,269:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:49 GMT
+Content-Type: application/json
+Content-Length: 658
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "KUuc1S3FYDs": "https://community.letsencrypt.org/t/adding-random-entries-to-the-directory/33417",
+  "keyChange": "https://acme-v02.api.letsencrypt.org/acme/key-change",
+  "meta": {
+    "caaIdentities": [
+      "letsencrypt.org"
+    ],
+    "termsOfService": "https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf",
+    "website": "https://letsencrypt.org"
+  },
+  "newAccount": "https://acme-v02.api.letsencrypt.org/acme/new-acct",
+  "newNonce": "https://acme-v02.api.letsencrypt.org/acme/new-nonce",
+  "newOrder": "https://acme-v02.api.letsencrypt.org/acme/new-order",
+  "revokeCert": "https://acme-v02.api.letsencrypt.org/acme/revoke-cert"
+}
+2022-06-06 17:09:49,270:DEBUG:acme.client:Requesting fresh nonce
+2022-06-06 17:09:49,270:DEBUG:acme.client:Sending HEAD request to https://acme-v02.api.letsencrypt.org/acme/new-nonce.
+2022-06-06 17:09:49,337:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "HEAD /acme/new-nonce HTTP/1.1" 200 0
+2022-06-06 17:09:49,338:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:49 GMT
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0002pd83DsIGK9NQaHgBOKumNRLhaRbH4KWQdHDOgchvHZo
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+
+2022-06-06 17:09:49,338:DEBUG:acme.client:Storing nonce: 0002pd83DsIGK9NQaHgBOKumNRLhaRbH4KWQdHDOgchvHZo
+2022-06-06 17:09:49,338:DEBUG:acme.client:JWS payload:
+b'{\n  "contact": [\n    "mailto:tmfynes@yahoo.com"\n  ],\n  "termsOfServiceAgreed": true\n}'
+2022-06-06 17:09:49,342:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-acct:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAiandrIjogeyJuIjogIjE3VE8zSEFpeTdSdndybXIyT2w4VFpBR1JQdC1oMWwxb3NlX255LTdTZ0lVZUJtTTZrSjFpREtoSHB5M2hGMDc4UWRzZWlPQ1hGZmE0T1hyS2VmemxWS1hYckNkZ1lGZzlUVnpmWEQxNVZUMnN5a05lMUY0TndLX3lIVzQzLUlGekhiRUVqRDhXbFRBMVNacHBYck1XV2s5QXVBaUZDaDJtRzk2cFNBYWR3VVNuM2RIV1FHNmtjQTl5U2w4R1NJNVZjdllJREt4QWN1dXNYN2hhdVN2MDBRVDlYbWNRcm1zUk43NnYxcXIyMmgyeHNwcmVTVHEzRkdkN0dPbXFkNVZvbThjd3Y0bS00dnRCUm8tN3pOT2dhOFJrckhJZG9kU1hOeWZJbGdiRzFkUjB0d0JMRXItU2xFd0szOUNCYkVuQTVLbFlZVENzNHBlOEZIOTA5NFRBUSIsICJlIjogIkFRQUIiLCAia3R5IjogIlJTQSJ9LCAibm9uY2UiOiAiMDAwMnBkODNEc0lHSzlOUWFIZ0JPS3VtTlJMaGFSYkg0S1dRZEhET2djaHZIWm8iLCAidXJsIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL25ldy1hY2N0In0",
+  "signature": "RQOeexen2ngUZTibZHA1PqY6_yD78IValirrNncC_9AmZprD_GU0q3bzx2CA4vWFzofXqyb1i9A8yGqTYHcrFPOBDDhKDQZgrgmtE_47uDl7VFiXS-u9MSQQT0v8917d2aZbRu0YnjCAZynV60wyICyhQ4ButZo97HM89kvoF8zUV7fndwVYSlsMfzHU5m0rERSm8ME9UDxpUUR8-5rX6nkIjZazKZZ8MtDz-vsiteL8C8ILWCWKkp678bvkhU17vNVEtfPFW49RnL7jGboNB8p17C9xunXdz81HMvhS_cIY5Ta14pWCC5V0ZOw-ejm5HeiFrzYfutdqw3hxJk3fwA",
+  "payload": "ewogICJjb250YWN0IjogWwogICAgIm1haWx0bzp0bWZ5bmVzQHlhaG9vLmNvbSIKICBdLAogICJ0ZXJtc09mU2VydmljZUFncmVlZCI6IHRydWUKfQ"
+}
+2022-06-06 17:09:49,450:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-acct HTTP/1.1" 201 559
+2022-06-06 17:09:49,451:DEBUG:acme.client:Received response:
+HTTP 201
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:49 GMT
+Content-Type: application/json
+Content-Length: 559
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index", <https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf>;rel="terms-of-service"
+Location: https://acme-v02.api.letsencrypt.org/acme/acct/576868546
+Replay-Nonce: 0001v1Ls9IKkqauqWC8K9rgOf2xD9j4QSPsDo8BlhLDyPVI
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "key": {
+    "kty": "RSA",
+    "n": "17TO3HAiy7Rvwrmr2Ol8TZAGRPt-h1l1ose_ny-7SgIUeBmM6kJ1iDKhHpy3hF078QdseiOCXFfa4OXrKefzlVKXXrCdgYFg9TVzfXD15VT2sykNe1F4NwK_yHW43-IFzHbEEjD8WlTA1SZppXrMWWk9AuAiFCh2mG96pSAadwUSn3dHWQG6kcA9ySl8GSI5VcvYIDKxAcuusX7hauSv00QT9XmcQrmsRN76v1qr22h2xspreSTq3FGd7GOmqd5Vom8cwv4m-4vtBRo-7zNOga8RkrHIdodSXNyfIlgbG1dR0twBLEr-SlEwK39CBbEnA5KlYYTCs4pe8FH9094TAQ",
+    "e": "AQAB"
+  },
+  "contact": [
+    "mailto:tmfynes@yahoo.com"
+  ],
+  "initialIp": "100.0.43.112",
+  "createdAt": "2022-06-06T21:09:49.456605593Z",
+  "status": "valid"
+}
+2022-06-06 17:09:49,451:DEBUG:acme.client:Storing nonce: 0001v1Ls9IKkqauqWC8K9rgOf2xD9j4QSPsDo8BlhLDyPVI
+2022-06-06 17:09:52,932:DEBUG:certbot._internal.display.obj:Notifying user: Account registered.
+2022-06-06 17:09:52,932:DEBUG:certbot._internal.main:Picked account: <Account(RegistrationResource(body=Registration(key=JWKRSA(key=<ComparableRSAKey(<cryptography.hazmat.backends.openssl.rsa._RSAPublicKey object at 0x105b211e0>)>), contact=('mailto:tmfynes@yahoo.com',), agreement=None, status='valid', terms_of_service_agreed=None, only_return_existing=None, external_account_binding=None), uri='https://acme-v02.api.letsencrypt.org/acme/acct/576868546', new_authzr_uri=None, terms_of_service='https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf'), 39f1c77e59947937a871020406422b5c, Meta(creation_dt=datetime.datetime(2022, 6, 6, 21, 9, 49, tzinfo=<UTC>), creation_host='tfynes-a01.vmware.com', register_to_eff='tmfynes@yahoo.com'))>
+2022-06-06 17:09:52,933:DEBUG:certbot._internal.display.obj:Notifying user: Requesting a certificate for *.homelab.tap.fynesy.com and 9 more domains
+2022-06-06 17:09:53,053:DEBUG:certbot.crypto_util:Generating RSA key (2048 bits): /Users/thomasfynes/PIVOTAL/CF/nginxtest/config/keys/0000_key-certbot.pem
+2022-06-06 17:09:53,058:DEBUG:certbot.crypto_util:Creating CSR: /Users/thomasfynes/PIVOTAL/CF/nginxtest/config/csr/0000_csr-certbot.pem
+2022-06-06 17:09:53,059:DEBUG:acme.client:JWS payload:
+b'{\n  "identifiers": [\n    {\n      "type": "dns",\n      "value": "*.homelab.tap.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.tkglab.tap.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.akslab.tap.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.gkelab.tap.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.ekslab.tap.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.cf.homelab.tap.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.cf.homelab.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.login.cf.homelab.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "*.uaa.cf.homelab.fynesy.com"\n    },\n    {\n      "type": "dns",\n      "value": "om.system.homelab.fynesy.com"\n    }\n  ]\n}'
+2022-06-06 17:09:53,060:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-order:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDF2MUxzOUlLa3FhdXFXQzhLOXJnT2YyeEQ5ajRRU1BzRG84QmxoTER5UFZJIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9uZXctb3JkZXIifQ",
+  "signature": "Jl0JWJRTbZeFWXL395uQZBviTuA4lUJ0uJvK2rkiT8giAOYpSM3Rla-sJD61Hv1IylxFj74Ag-EHQvPRux60aE8t5rL9XIOANPvqx7CWy9eTvv3V1eWNye6p2Q7GF5uBKg9hpXoiFOW2SBUTsLpicsqpgCRZyQQfCZe50O4YKZdU0BIQQP73ZuIe8v71PHSRkbZ6NnmpdxlLhxrQhSkGq8AW5LZkZ3PX7FEiwARwlPKXxo8qb0qBMSuixr4PLHUVKyq8-vk20kcm9Q9_GG7kh1ZyKe3oUZU2Ua1-jTRkdqSnybSoc4wrWFtus2ip164KC2j4rBLJg1WZEM13CTBmdA",
+  "payload": "ewogICJpZGVudGlmaWVycyI6IFsKICAgIHsKICAgICAgInR5cGUiOiAiZG5zIiwKICAgICAgInZhbHVlIjogIiouaG9tZWxhYi50YXAuZnluZXN5LmNvbSIKICAgIH0sCiAgICB7CiAgICAgICJ0eXBlIjogImRucyIsCiAgICAgICJ2YWx1ZSI6ICIqLnRrZ2xhYi50YXAuZnluZXN5LmNvbSIKICAgIH0sCiAgICB7CiAgICAgICJ0eXBlIjogImRucyIsCiAgICAgICJ2YWx1ZSI6ICIqLmFrc2xhYi50YXAuZnluZXN5LmNvbSIKICAgIH0sCiAgICB7CiAgICAgICJ0eXBlIjogImRucyIsCiAgICAgICJ2YWx1ZSI6ICIqLmdrZWxhYi50YXAuZnluZXN5LmNvbSIKICAgIH0sCiAgICB7CiAgICAgICJ0eXBlIjogImRucyIsCiAgICAgICJ2YWx1ZSI6ICIqLmVrc2xhYi50YXAuZnluZXN5LmNvbSIKICAgIH0sCiAgICB7CiAgICAgICJ0eXBlIjogImRucyIsCiAgICAgICJ2YWx1ZSI6ICIqLmNmLmhvbWVsYWIudGFwLmZ5bmVzeS5jb20iCiAgICB9LAogICAgewogICAgICAidHlwZSI6ICJkbnMiLAogICAgICAidmFsdWUiOiAiKi5jZi5ob21lbGFiLmZ5bmVzeS5jb20iCiAgICB9LAogICAgewogICAgICAidHlwZSI6ICJkbnMiLAogICAgICAidmFsdWUiOiAiKi5sb2dpbi5jZi5ob21lbGFiLmZ5bmVzeS5jb20iCiAgICB9LAogICAgewogICAgICAidHlwZSI6ICJkbnMiLAogICAgICAidmFsdWUiOiAiKi51YWEuY2YuaG9tZWxhYi5meW5lc3kuY29tIgogICAgfSwKICAgIHsKICAgICAgInR5cGUiOiAiZG5zIiwKICAgICAgInZhbHVlIjogIm9tLnN5c3RlbS5ob21lbGFiLmZ5bmVzeS5jb20iCiAgICB9CiAgXQp9"
+}
+2022-06-06 17:09:53,215:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-order HTTP/1.1" 201 1681
+2022-06-06 17:09:53,216:DEBUG:acme.client:Received response:
+HTTP 201
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 1681
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Location: https://acme-v02.api.letsencrypt.org/acme/order/576868546/95413348916
+Replay-Nonce: 0001vvnmv-bVcdS5X61AKn40usU_9m5z-oceBgBum57Ml84
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "identifiers": [
+    {
+      "type": "dns",
+      "value": "*.akslab.tap.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.cf.homelab.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.cf.homelab.tap.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.ekslab.tap.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.gkelab.tap.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.homelab.tap.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.login.cf.homelab.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.tkglab.tap.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "*.uaa.cf.homelab.fynesy.com"
+    },
+    {
+      "type": "dns",
+      "value": "om.system.homelab.fynesy.com"
+    }
+  ],
+  "authorizations": [
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434576",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434586",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434596",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434606",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434616",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434626",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434636",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434646",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434656",
+    "https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434666"
+  ],
+  "finalize": "https://acme-v02.api.letsencrypt.org/acme/finalize/576868546/95413348916"
+}
+2022-06-06 17:09:53,216:DEBUG:acme.client:Storing nonce: 0001vvnmv-bVcdS5X61AKn40usU_9m5z-oceBgBum57Ml84
+2022-06-06 17:09:53,218:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,219:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434576:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDF2dm5tdi1iVmNkUzVYNjFBS240MHVzVV85bTV6LW9jZUJnQnVtNTdNbDg0IiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ1NzYifQ",
+  "signature": "g_rHYEiHQ7WHW9nuBLYWma3AsitIfSWJmguqjobuy2mHUmM9YTpVwAsLsH2_c0yRZUYLKcU3njsjMoog1UsuY-zW33aRW9Byg9OorE10au_4BVfi25h108KV7LhvhzGvj5tfRA9CvUwOhwNy0dykZpwS8ZW5tdrMKYeu1LASl4HWqmZ3gfsbtP6M8omC12jKBq8yh_B_Yy9-2sLaiaphAR9rHWy654Eo_hhmVSVkLxednt_M018aCDfYPPRSY9n-6I0oLjlsIa8szJ0IirfJoXJIYlDi7QQuavn3lRI8CKG-jUB2H1ij4SG4WzYW8slmd7SEat06xL_9aY9f4bVl-Q",
+  "payload": ""
+}
+2022-06-06 17:09:53,291:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434576 HTTP/1.1" 200 395
+2022-06-06 17:09:53,292:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 395
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001KXGY2qA1Njh0l3ZZmL5IxV49x0Fx2zWgJDxLd-9Bp0Y
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "akslab.tap.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434576/vpjxKw",
+      "token": "qWNyyanmGkdmxQFrRkd88q9rOlID8niCl87gwZwBqJ8"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,292:DEBUG:acme.client:Storing nonce: 0001KXGY2qA1Njh0l3ZZmL5IxV49x0Fx2zWgJDxLd-9Bp0Y
+2022-06-06 17:09:53,293:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,295:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434586:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDFLWEdZMnFBMU5qaDBsM1pabUw1SXhWNDl4MEZ4MnpXZ0pEeExkLTlCcDBZIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ1ODYifQ",
+  "signature": "JZN2PiomfIfB1NksypdHcmtXF6bwh5cIpauv2cG8g8VOi9THBytaNPwAPWz4lATsx1W2gHawGwIvd7nTLzqm6a1B1EYhB2WUEflg4zoEIqMBvSh840MHsPqoec_ZSJTcMwdkZlZ7JXzl8dH-B59uOuBhPyrY851iyU1arCrr1cQXYQuRiyTSO6kUzMx7pNgqb-MwfmY6gHAl7yEpCt5PCFUu81D1bQuov-YMMPRbHgcHTDdR2t-z38BZrpCL7ss07JSdr5uKf5y7bNx5Z1CgeSoXdksckcEXgieq2wJpRUFwp7mYWEgZo5eri4DFG892CWibRaHkuYH80I5Nme36ig",
+  "payload": ""
+}
+2022-06-06 17:09:53,369:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434586 HTTP/1.1" 200 395
+2022-06-06 17:09:53,369:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 395
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 00015pjXv5v5Xv64UXstwyLQKV3455nGS4DH7wSmxIW0Np8
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "cf.homelab.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434586/64HvoA",
+      "token": "1ChLFQzQmz1Bof6N6Ah9GXTRoFRmrnb_oRRS-I-NkYk"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,370:DEBUG:acme.client:Storing nonce: 00015pjXv5v5Xv64UXstwyLQKV3455nGS4DH7wSmxIW0Np8
+2022-06-06 17:09:53,370:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,371:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434596:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDE1cGpYdjV2NVh2NjRVWHN0d3lMUUtWMzQ1NW5HUzRESDd3U214SVcwTnA4IiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ1OTYifQ",
+  "signature": "N8yNRdnBa89O8hO04Mm4-Osg-Bp_LD96AucjIYCS2Dkn98vLSG_2IaWlnOZrNNc5ewikwTtcpb3n8BZFEY0WQpU4Zsf-c2jH3LaMrm2n-ySswkFzjmfqFe9P48wfc8WynqegL8TXy_7thN_38f_ctqqH-zzQWvYM2IEOSAs0Cr9-L2wV8sHyL4XyWvXEwgse1vALBLK5ztrjr_36Mi9Z62OTQd2noJsQph-z6Yt8WgQKbKK0JGDwcxCs-VxA_F-gjBtK-9rAamEz_YjWEZkPEH40wpbSVk6L3sy5InX1Kxz8teZ6FkNTW6RLMc_zEm1a5qrtQfm8cqOstRi9j3_6Dg",
+  "payload": ""
+}
+2022-06-06 17:09:53,440:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434596 HTTP/1.1" 200 399
+2022-06-06 17:09:53,441:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 399
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001M3ncnbFPS0ysQabCC2yueW12TXyI1ZrVcAwJZyDCCE8
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "cf.homelab.tap.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434596/DN3ofg",
+      "token": "BU3Ja56rJ3hWtlOlbcMiksI47Jn8sfgPp-6zGmx1qvQ"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,441:DEBUG:acme.client:Storing nonce: 0001M3ncnbFPS0ysQabCC2yueW12TXyI1ZrVcAwJZyDCCE8
+2022-06-06 17:09:53,441:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,443:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434606:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDFNM25jbmJGUFMweXNRYWJDQzJ5dWVXMTJUWHlJMVpyVmNBd0paeURDQ0U4IiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ2MDYifQ",
+  "signature": "fRGoz8eN_Q9QzC6OA7lR8wtEmhA9VHIVzbCIVSRg4j4V2gROl9g1ybl7cld5t28J9zwtFM6P-PbB79jwftibIWyJG8Qwg7EQuAPRLH46fka6YBdNAWBycJKQLAxujCIXPDhJu5Nia3TUeB1g6x122UrZK9P-zQAVY772KKwB5145Mb_gHN_HDiRM0WUaYgfekyAj_BdByrkse0niEmUFFtv_hnStXAo09KQdFystPuWmO9wfkjOmO06zq2BZyBis9PRbMhNL9jjT3sf3mVM-zcAqI-_gHb_rmV2-mVygIBJbFkIhefLhJ8HHFOwbKE0pX70uqDz36vNAUsVQO2m1mA",
+  "payload": ""
+}
+2022-06-06 17:09:53,515:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434606 HTTP/1.1" 200 395
+2022-06-06 17:09:53,516:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 395
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 00010t1fIjl5rPuMGPggJsyghz0tLiwnCqaJzFP7Os0Yblo
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "ekslab.tap.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434606/_99Z7w",
+      "token": "kmyfjhfEpJjh33R-SCaQZ-DmosZv5FGLrslrFmfZQEs"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,517:DEBUG:acme.client:Storing nonce: 00010t1fIjl5rPuMGPggJsyghz0tLiwnCqaJzFP7Os0Yblo
+2022-06-06 17:09:53,517:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,519:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434616:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDEwdDFmSWpsNXJQdU1HUGdnSnN5Z2h6MHRMaXduQ3FhSnpGUDdPczBZYmxvIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ2MTYifQ",
+  "signature": "Qm4m9qblZ4tM-6F_i1q3gR4PJ0kT4jtxJ3DBbvjBWSE60ckBDrlh4CByVluF-HLHiyiGGpPv_-VLJEpbVZlYEbseEyQvuv2duH13kG3VL2WIxsPidAeQSebjcFCqf5usOWf9NCr_x1DUtH54_plx_dHEk1lF1gcI6YZQ8C1mY6WOfhlQx-l4eJ9LBJ-jH1Hdj79sfQM3z9xZsX-_CVHNOzTONsr5yYf4AeMxWWhZk3ypX7wR1IqxcD8kqxHPDnCxBlMh4xlbsiD6iBYsNlqlhfWZD_OKBctfyXw5VptlnfBck74BIlJgqqRT7x0ic9HILsGI-vyLoDrszByG57jTSw",
+  "payload": ""
+}
+2022-06-06 17:09:53,594:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434616 HTTP/1.1" 200 395
+2022-06-06 17:09:53,594:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 395
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0002JB-LEgAYHtwamlTmPKJ00fn_LugejtMmnY-g8zg7Bho
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "gkelab.tap.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434616/iuPEHg",
+      "token": "da93aMr55lo5ZM0IZqgU2ZVEyol2IQZoHX2rPlR4AUA"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,595:DEBUG:acme.client:Storing nonce: 0002JB-LEgAYHtwamlTmPKJ00fn_LugejtMmnY-g8zg7Bho
+2022-06-06 17:09:53,595:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,597:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434626:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDJKQi1MRWdBWUh0d2FtbFRtUEtKMDBmbl9MdWdlanRNbW5ZLWc4emc3QmhvIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ2MjYifQ",
+  "signature": "AoXljtrPmDiLpjJMWfGCbvV1GylrBgWfn2qKrbAGoqBBBQV_RRGXIfTEFNd1wa7rFAzvUttU-HBwiBPW9DbA7OHxUJygO1JPEXX7I_RJ74avwmG7OAYBUDEUxCo6y7Y9V2ctJGcI74jvMsvBmL1EO52TbQP9w_YXWBz5yGwEz2DH5Ttse1K0k7mGjxTgpEwPOvkUf5P-NhPzRwBazGA7PwtI4wgYcvs4Hov_Ovhk7qh8JzEF-9lLWs9HSLsWnCw6rDhcfjrLkZpp1_H-lVrwI4FRsbW7oztvArkgnHoz6SkYHqItAcLsFetbRgMZpy641_G19tASfYWjNT9aisum0A",
+  "payload": ""
+}
+2022-06-06 17:09:53,675:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434626 HTTP/1.1" 200 396
+2022-06-06 17:09:53,676:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 396
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001tQcbl4_HG-iTdXm6RdIDgr66bWTiSAou3eeqm19vADc
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "homelab.tap.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434626/v2VQ6g",
+      "token": "tIB3_4fbfgV6L8GK5gnQOnv67hydyu-vpqw9-HaKFvQ"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,676:DEBUG:acme.client:Storing nonce: 0001tQcbl4_HG-iTdXm6RdIDgr66bWTiSAou3eeqm19vADc
+2022-06-06 17:09:53,676:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,678:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434636:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDF0UWNibDRfSEctaVRkWG02UmRJRGdyNjZiV1RpU0FvdTNlZXFtMTl2QURjIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ2MzYifQ",
+  "signature": "lbG485wAku8_R5qijmBsbT_eza6iOgWzBPuBm0LPJOR8x67czRr-d6oTON5xghg-G4oFqyskT2c9ExYT2kqcW7IqW91RxVAG_LQL7WeMNq9MUG4TD8xKfjRMvy4Ueg8QhVV0A1IDiDAwcG0Bf4OrXwj224bipyKhIxhgl3k-a9W2snyu60xA0RdJUBEDXUOTZz4d2IIbyDuMmz0nq51iXaRfz9lqkbZyUSnnMWKVcfHt7VpREs5yJKk746S4eVBtFIzVQ8kYl_YdHUcqQf_KHKgsItf1ReAdsLytehmjxY9SbtwRYSnZHmhbI0tKn-YwGCN4Z1oWPXcYJronXvNzjw",
+  "payload": ""
+}
+2022-06-06 17:09:53,748:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434636 HTTP/1.1" 200 401
+2022-06-06 17:09:53,749:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 401
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001dOXtScSYHLrLhJEqddbb5ueRUTKaH41wvaweQJRDg7Y
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "login.cf.homelab.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434636/_3wCzg",
+      "token": "ID-UDPyX2ePb_Unsz5F5pvYXYDSavdePCaAGsb2BMWw"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,749:DEBUG:acme.client:Storing nonce: 0001dOXtScSYHLrLhJEqddbb5ueRUTKaH41wvaweQJRDg7Y
+2022-06-06 17:09:53,749:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,751:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434646:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDFkT1h0U2NTWUhMckxoSkVxZGRiYjV1ZVJVVEthSDQxd3Zhd2VRSlJEZzdZIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ2NDYifQ",
+  "signature": "wwhtHkGePa1dLdrx8WUu5tJylBY3BzyljjFh_SPBb_TDtj4KJz2_C0tOYs-Upcf5z8-whfudBxOROu9emHQ-6MOFeI3bvc9ycNqyHOJ0wD9XFIMGde5y0V2v2xIp9jkIk_xDPmxypscALJZwEn2JmXm7Z53Yu90l8OdnbsJMFGkFDGVgsDqPqkhpoM2qWXnKMaqcfRru_paPnhA592vLLuRW-CAlCm9WbJZrlxARprksFI4kho-cDqmutLrFnGsrfD5y5dIFnYJ-VUgl8FpNYL-2mfKJRyCbcfLZit4JrKp2z69Vo_sRlPgS0hHQ9yHAID7wIa2aA5RwNgbb_2wdLA",
+  "payload": ""
+}
+2022-06-06 17:09:53,821:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434646 HTTP/1.1" 200 395
+2022-06-06 17:09:53,822:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 395
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001J7peFtck04qgDk535IUU15LrS-yHUTmgW5q_Gicn1ZA
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "tkglab.tap.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434646/8jHPQA",
+      "token": "IHf5mgZId-hgo1B2PRxPWKm8SDagDtydB_Lyc73aFjg"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,822:DEBUG:acme.client:Storing nonce: 0001J7peFtck04qgDk535IUU15LrS-yHUTmgW5q_Gicn1ZA
+2022-06-06 17:09:53,823:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,824:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434656:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDFKN3BlRnRjazA0cWdEazUzNUlVVTE1THJTLXlIVVRtZ1c1cV9HaWNuMVpBIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ2NTYifQ",
+  "signature": "SGAIwxjgwK37g-1UOtWjgw1ywkjhDVMoj_MU4YRbqOcjBrpP3Jt_KfEERAqDvaWFCEsfBbLpQK2USCZhbP7hOjCBykN-ehXmbyopEvBeJdg9SAlRTBII-7Pvajxw1j5j1ZL9P2fV7RkcAbV0dY1txihr95DyNmalgwWtT_Abeui_T9yuqWepHTomNVPLIl5WMIjB5tW4MjiYyBIt_7ic-qd6I48-k_mTQL480L1AOG5A9VmXLwsqFWm5LcTc2yc1bM_xixD2OKrLLDsFncY1CUeVL9Hx9LNuzvNg8Ne475HvgU7bEUw6PAKsbmeXnwpFxGGb2GBDAoWPPBSh1autyw",
+  "payload": ""
+}
+2022-06-06 17:09:53,914:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434656 HTTP/1.1" 200 399
+2022-06-06 17:09:53,915:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:53 GMT
+Content-Type: application/json
+Content-Length: 399
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0002l43ob4DSKcrct-lA2urSXflsSpEih_fDcDVZG1skGoI
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "uaa.cf.homelab.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434656/yFK4zQ",
+      "token": "xuETDX1NDSK3BJRraqXwd5uvgTYifY2dIbl-dXew0o4"
+    }
+  ],
+  "wildcard": true
+}
+2022-06-06 17:09:53,915:DEBUG:acme.client:Storing nonce: 0002l43ob4DSKcrct-lA2urSXflsSpEih_fDcDVZG1skGoI
+2022-06-06 17:09:53,916:DEBUG:acme.client:JWS payload:
+b''
+2022-06-06 17:09:53,918:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/authz-v3/116832434666:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvNTc2ODY4NTQ2IiwgIm5vbmNlIjogIjAwMDJsNDNvYjREU0tjcmN0LWxBMnVyU1hmbHNTcEVpaF9mRGNEVlpHMXNrR29JIiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9hdXRoei12My8xMTY4MzI0MzQ2NjYifQ",
+  "signature": "Ku-yUV4ExgP_Rj-Lm64UdIT1jsbvX8Mo1F3GH8KrxeED4Vo3ZHZyAvLpF1u4sP-ud5xE-lbo1ujVHMF6OZ3EBwljR2IZUozn_TlkBCzIkTW8RDn_L9N_qDwkGpYZRRa2irNWVln5tQer3PtefoUGKX25CqAsMQNILL8CsWz3utyIiPGgQ8deB3XMNoGRiLgljGdbZyDUhxD3AgMOJR-UHIW6VVykTK14zhObWwunk4awFsbrSNQh4tm8Pc9JXAEWLCg5M6mkbdHHSjWfpmJCzMfrOyFmjTK0ZBKmUY7x3tQ5GwQBFWoJ6aWU-Epz0iR2T7wJGdPzci53WHFgw7buUg",
+  "payload": ""
+}
+2022-06-06 17:09:53,991:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/116832434666 HTTP/1.1" 200 812
+2022-06-06 17:09:53,999:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Mon, 06 Jun 2022 21:09:54 GMT
+Content-Type: application/json
+Content-Length: 812
+Connection: keep-alive
+Boulder-Requester: 576868546
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001LyUf35F6ZOLrwjbfxEl161lf9FrHoA1FXmx4pFe_SMw
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "om.system.homelab.fynesy.com"
+  },
+  "status": "pending",
+  "expires": "2022-06-13T21:09:53Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434666/5IAw_Q",
+      "token": "ZEEFD_gM7WBjXx7RnhFPUbJ_Ug3KvY4dA-LUjr1norM"
+    },
+    {
+      "type": "dns-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434666/g2y41w",
+      "token": "ZEEFD_gM7WBjXx7RnhFPUbJ_Ug3KvY4dA-LUjr1norM"
+    },
+    {
+      "type": "tls-alpn-01",
+      "status": "pending",
+      "url": "https://acme-v02.api.letsencrypt.org/acme/chall-v3/116832434666/AfBrFw",
+      "token": "ZEEFD_gM7WBjXx7RnhFPUbJ_Ug3KvY4dA-LUjr1norM"
+    }
+  ]
+}
+2022-06-06 17:09:54,000:DEBUG:acme.client:Storing nonce: 0001LyUf35F6ZOLrwjbfxEl161lf9FrHoA1FXmx4pFe_SMw
+2022-06-06 17:09:54,002:INFO:certbot._internal.auth_handler:Performing the following challenges:
+2022-06-06 17:09:54,003:INFO:certbot._internal.auth_handler:dns-01 challenge for akslab.tap.fynesy.com
+2022-06-06 17:09:54,003:INFO:certbot._internal.auth_handler:dns-01 challenge for cf.homelab.fynesy.com
+2022-06-06 17:09:54,003:INFO:certbot._internal.auth_handler:dns-01 challenge for cf.homelab.tap.fynesy.com
+2022-06-06 17:09:54,003:INFO:certbot._internal.auth_handler:dns-01 challenge for ekslab.tap.fynesy.com
+2022-06-06 17:09:54,003:INFO:certbot._internal.auth_handler:dns-01 challenge for gkelab.tap.fynesy.com
+2022-06-06 17:09:54,003:INFO:certbot._internal.auth_handler:dns-01 challenge for homelab.tap.fynesy.com
+2022-06-06 17:09:54,003:INFO:certbot._internal.auth_handler:dns-01 challenge for login.cf.homelab.fynesy.com
+2022-06-06 17:09:54,004:INFO:certbot._internal.auth_handler:dns-01 challenge for tkglab.tap.fynesy.com
+2022-06-06 17:09:54,004:INFO:certbot._internal.auth_handler:dns-01 challenge for uaa.cf.homelab.fynesy.com
+2022-06-06 17:09:54,004:INFO:certbot._internal.auth_handler:dns-01 challenge for om.system.homelab.fynesy.com
+2022-06-06 17:09:54,005:DEBUG:certbot._internal.display.obj:Notifying user: Please deploy a DNS TXT record under the name:
+
+_acme-challenge.akslab.tap.fynesy.com.
+
+with the following value:
+
+CZcB97hDbmeIkQ4NoS78gq0-1s2dwkiw-joN2GUDaEM
+
+2022-06-06 17:09:56,889:DEBUG:certbot._internal.error_handler:Encountered exception:
+Traceback (most recent call last):
+  File "/usr/local/Cellar/certbot/1.26.0/libexec/lib/python3.10/site-packages/certbot/_internal/auth_handler.py", line 86, in handle_authorizations
+    resps = self.auth.perform(achalls)
+  File "/usr/local/Cellar/certbot/1.26.0/libexec/lib/python3.10/site-packages/certbot/_internal/plugins/manual.py", line 186, in perform
+    self._perform_achall_manually(achall, i == last_dns_achall)
+  File "/usr/local/Cellar/certbot/1.26.0/libexec/lib/python3.10/site-packages/certbot/_internal/plugins/manual.py", line 236, in _perform_achall_manually
+    display_util.notification(msg, wrap=False, force_interactive=True)
+  File "/usr/local/Cellar/certbot/1.26.0/libexec/lib/python3.10/site-packages/certbot/display/util.py", line 75, in notification
+    obj.get_display().notification(message, pause=pause, wrap=wrap,
+  File "/usr/local/Cellar/certbot/1.26.0/libexec/lib/python3.10/site-packages/certbot/_internal/display/obj.py", line 95, in notification
+    util.input_with_timeout("Press Enter to Continue")
+  File "/usr/local/Cellar/certbot/1.26.0/libexec/lib/python3.10/site-packages/certbot/_internal/display/util.py", line 65, in input_with_timeout
+    line = misc.readline_with_timeout(timeout, prompt)
+  File "/usr/local/Cellar/certbot/1.26.0/libexec/lib/python3.10/site-packages/certbot/compat/misc.py", line 80, in readline_with_timeout
+    rlist, _, _ = select.select([sys.stdin], [], [], timeout)
+KeyboardInterrupt
+
+2022-06-06 17:09:56,889:DEBUG:certbot._internal.error_handler:Calling registered functions
+2022-06-06 17:09:56,889:INFO:certbot._internal.auth_handler:Cleaning up challenges
+2022-06-06 17:09:56,889:ERROR:certbot._internal.log:Exiting due to user request.
